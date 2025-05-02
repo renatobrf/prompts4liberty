@@ -1,5 +1,5 @@
 # Prompts4liberty
-This is person project create to share knowledge on prompting engineering for common usecases.
+This is person project create to share knowledge on prompting engineering for common use-cases.
 
 # About me
 [Renato Barufi](https://www.linkedin.com/in/renato-barufi-a2a7ab130/), Solutions Architect, passion for technology.
