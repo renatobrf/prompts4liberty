@@ -2,8 +2,7 @@
 This is person project create to share knowledge on prompting engineering for common usecases.
 
 # About me
-Renato Barufi, Solutions Architect, passion for technology.
-[Renato Barufi - LinkedIn](https://www.linkedin.com/in/renato-barufi-a2a7ab130/)
+[Renato Barufi](https://www.linkedin.com/in/renato-barufi-a2a7ab130/), Solutions Architect, passion for technology.
 
 # Contributing
 
