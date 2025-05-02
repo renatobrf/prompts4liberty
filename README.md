@@ -7,8 +7,9 @@ This is person project create to share knowledge on prompting engineering for co
 # Contributing
 
 # Main street
-- create a python script for "describing a specific purpose"?
-- add inteligence in this script? (sharing a file reference)
+- create a python script for "describing a specific purpose".
+- create a node.js frontend based on this service.
+- add inteligence in this script. (sharing a file reference)
 
 # Performance score
 This is a simple script to execute a performance validation in a personal computer - creating a score before 30 seconds of execution.
