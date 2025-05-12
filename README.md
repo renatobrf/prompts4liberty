@@ -14,3 +14,6 @@ This is person project create to share knowledge on prompting engineering for co
 # Performance score
 This is a simple script to execute a performance validation in a personal computer - creating a score before 30 seconds of execution.
 - python3 performance_score.py > out.txt
+
+# App weather
+Using a standard subject to create a mobile app just using a script command.
