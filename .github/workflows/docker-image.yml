@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: prompts4liberty-CI
 
 on:
   push:
