@@ -1,0 +1,3 @@
+<p>help me to write a prompt to create a summary for solutions architect task, focus on monitoring and observability in a multi-cloud environment.</p>
+<p>help me to write a prompt to create a blog post to share updates in my books page for a specific audience.</p>
+<p>Me ajuda a escrever um prompt que peça orientações para a construção de um negócio digital no modelo saas, agindo como um business coaching para este meu novo negócio.</p>
