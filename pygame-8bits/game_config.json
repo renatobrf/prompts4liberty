@@ -1,0 +1,55 @@
+{
+  "title": "8-Bit Market Stocks",
+  "screen": {
+    "width": 800,
+    "height": 480,
+    "fps": 60
+  },
+  "colors": {
+    "sky": [20, 24, 82],
+    "ground": [30, 30, 30],
+    "white": [240, 240, 240],
+    "green": [80, 220, 120],
+    "red": [220, 70, 70],
+    "yellow": [250, 220, 90],
+    "blue": [80, 160, 255],
+    "gray": [120, 120, 120],
+    "grid": [35, 40, 100]
+  },
+  "player": {
+    "start_x": 80,
+    "start_y": 240,
+    "width": 28,
+    "height": 28,
+    "speed": 5,
+    "start_portfolio": 100,
+    "start_lives": 3,
+    "invulnerability_frames": 50
+  },
+  "items": {
+    "speed": 4,
+    "spawn_interval_ms": 900,
+    "size_min": 18,
+    "size_max": 26,
+    "spawn_weights": {
+      "profit": 0.55,
+      "boost": 0.20,
+      "crash": 0.25
+    },
+    "profit_value_range": [8, 18],
+    "boost_value_range": [15, 25],
+    "crash_loss_range": [10, 22]
+  },
+  "gameplay": {
+    "hud_height": 40,
+    "bottom_margin": 20,
+    "level_score_step": 80,
+    "restart_key": "r"
+  },
+  "text": {
+    "move_hint": "Move: Arrows",
+    "bottom_hint": "Collect green/yellow stocks, avoid red crashes",
+    "game_over_title": "MARKET CLOSED",
+    "restart_hint": "Press R to restart"
+  }
+}
