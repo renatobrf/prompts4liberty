@@ -1,7 +1,8 @@
 # Install pygame in the active Python environment:
 
-python3 -m pip install pygame
+- $ python -m pip install pygame
+- win: pip install pygame-ce
 
 # Run the game:
 
-python market_game.py
+- python market_game.py
