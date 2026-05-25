@@ -1,6 +1,6 @@
 # Install pygame in the active Python environment:
 
-pip install pygame
+python3 -m pip install pygame
 
 # Run the game:
 
