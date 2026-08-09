@@ -15,3 +15,11 @@
 - budget plan for a solution in a cloud
 - architecture solution for a specific usecase in a cloud
 - architecture assessment to run a solution on-premise or in a cloud 
+- security review for a solution
+- modernization plan for a legacy system
+
+# guidelines
+- big picture for systems integration and service catalogue
+- roadmap for systems evolution
+- technology as a part of business
+- AI native products
