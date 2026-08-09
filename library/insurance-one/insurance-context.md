@@ -1,0 +1,1 @@
+- susep is the local regulator for all of insurance operation.
