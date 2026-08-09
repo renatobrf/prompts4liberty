@@ -1,0 +1,3 @@
+- I'm a solution architect.
+- Think in a AI Architect Specialist as an evoltion from my initial role.
+- All the content must to be created in English.
