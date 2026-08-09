@@ -23,3 +23,8 @@
 - roadmap for systems evolution
 - technology as a part of business
 - AI native products
+
+# author
+- set me as author of all the content and share my linkedin page as a contact channel.
+- Renato Barufi, Solution Architect and AI Specialist
+- https://www.linkedin.com/in/renato-barufi-a2a7ab130/
