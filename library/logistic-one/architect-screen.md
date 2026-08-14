@@ -1,0 +1,7 @@
+# a panel about the current systems that we have to provide this logistic services for a retail company.
+- IBM mainframe systems running DB2 and cobol.
+- IBM as/400 on i-series running DB2 and cobol.
+- Linux servers running DB2, PostgreSQL and webserver's in a on-premisse environment.
+- Linux servers running PostgreSQL and webserver's on cloud.
+- Apache Kafka for ESB.
+- Apache Kafka Connect for CDC.
