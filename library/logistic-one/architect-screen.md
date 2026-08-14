@@ -17,3 +17,6 @@ Panel about the current systems that we have to provide this logistic services f
 
 # Service catalogue
 - using API gateway to centralize API calls and apply a security layer.
+
+# Web cache
+- using Akami as webcache to have maximum performance on web pages.
