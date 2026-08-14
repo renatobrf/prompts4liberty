@@ -5,3 +5,7 @@
 - Linux servers running PostgreSQL and webserver's on cloud.
 - Apache Kafka for ESB.
 - Apache Kafka Connect for CDC.
+
+# microservices platform
+- Kubernetes cluster and Dockers
+- MongoDB for non-relational database on front-ends
