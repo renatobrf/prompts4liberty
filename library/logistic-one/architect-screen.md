@@ -7,7 +7,8 @@
 - Apache Kafka Connect for CDC.
 
 # microservices platform
-- Kubernetes cluster and Dockers
+- Kubernetes cluster's on-premisse and on cloud environment
+- Dockers in a private images repository
 - MongoDB for non-relational database on front-ends
 - Using Node.js and Go Lang to build front-ends
 - Using Python and Java to build the back-ends
