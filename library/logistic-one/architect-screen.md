@@ -9,3 +9,5 @@
 # microservices platform
 - Kubernetes cluster and Dockers
 - MongoDB for non-relational database on front-ends
+- Using Node.js and Go Lang to build front-ends
+- Using Python and Java to build the back-ends
