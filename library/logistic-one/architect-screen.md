@@ -20,3 +20,17 @@ Panel about the current systems that we have to provide this logistic services f
 
 # Web cache
 - using Akami as webcache to have maximum performance on web pages.
+
+# business architecture / domains - verticais de negocio
+- B2B
+- e-commerce
+- lojas fisicas
+- logistica
+- marketplace
+- cdc - crediario
+
+# eventos sazonais do varejo
+- Black Friday
+- Natal
+- Dia das maes
+- Dia dos namorados
