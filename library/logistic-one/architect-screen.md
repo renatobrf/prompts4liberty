@@ -34,3 +34,7 @@ Panel about the current systems that we have to provide this logistic services f
 - Natal
 - Dia das maes
 - Dia dos namorados
+
+# ci/cd on-premisse and cloud
+- turn-on/off about non-prod env on critical events - like black friday
+- using all resources to production environment on critical events - like black friday
