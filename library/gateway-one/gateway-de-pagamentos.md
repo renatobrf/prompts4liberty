@@ -9,6 +9,7 @@
 - hiker validacao arquivos, carga de arquivos
 - configServerFiles
 - bulk files
+- api gateway na aws cloud, que permite direcionar o fluxo de chamadas para a cloud ou para o ambiente on-premisse
 
 # componente: hiker
 
