@@ -1,0 +1,3 @@
+- we are in 1998 as an small university that use an IBM as/400 running ibm i-series, DB2 and cobol as the main controller for all operations about students, billing, courses, financial. But everything is a mess in this environment because we dont have an ERP or a central point that we can connect the requirements. We just have a lot of cobol programs to interact with this DB2 database.
+- new tecnologies are comming, and what we are looking for is a way to build a connector from a ibm-pc architecture to access this database in a safety mode and interact with this data, because we need to build web-based programs and offer this kind of solution in a internal pool of users, making the things more visual and interactive.
+- we are totally open for suggestions.
