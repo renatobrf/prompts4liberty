@@ -1,0 +1,579 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>University One - Student Portal & Management System</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #ff6600;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .nav-bar {
+            background-color: #004d7a;
+            padding: 0;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .nav-bar a {
+            display: inline-block;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 14px;
+            border-right: 1px solid #003366;
+        }
+
+        .nav-bar a:hover {
+            background-color: #ff6600;
+            cursor: pointer;
+        }
+
+        .nav-bar a:last-child {
+            border-right: none;
+        }
+
+        .login-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .login-section h2 {
+            color: #003366;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 10px;
+        }
+
+        .login-form {
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #003366;
+            font-size: 13px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 13px;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff6600;
+            box-shadow: 0 0 5px rgba(255, 102, 0, 0.3);
+        }
+
+        .button-group {
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #e55a00;
+        }
+
+        .btn-secondary {
+            background-color: #666;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        .portals-section {
+            margin-bottom: 30px;
+        }
+
+        .portals-section h2 {
+            color: #003366;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 10px;
+        }
+
+        .portals-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .portal-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .portal-card h3 {
+            color: #ff6600;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .portal-card p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .portal-card ul {
+            list-style-position: inside;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .portal-card ul li {
+            margin-bottom: 5px;
+        }
+
+        .portal-card .btn {
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .features-section {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .features-section h2 {
+            color: #003366;
+            margin-bottom: 20px;
+            font-size: 20px;
+            border-bottom: 2px solid #ff6600;
+            padding-bottom: 10px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #ff6600;
+            border-radius: 3px;
+        }
+
+        .feature-item h4 {
+            color: #003366;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .feature-item p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .info-section {
+            background-color: #ffffcc;
+            border: 1px solid #ffcc00;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .info-section strong {
+            color: #003366;
+        }
+
+        .footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .portals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-bar a {
+                display: block;
+                border-right: none;
+                border-bottom: 1px solid #003366;
+            }
+
+            .nav-bar a:last-child {
+                border-bottom: none;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>University One</h1>
+        <p>Integrated Student Portal & Management System</p>
+        <span class="status-badge">System Online</span>
+    </div>
+
+    <div class="container">
+        <div class="nav-bar">
+            <a href="#login">Login</a>
+            <a href="#portals">Portals</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="info-section">
+            <strong>Welcome to University One!</strong> This new web-based system provides modern, interactive access to your university data and services. Please log in to access your account or explore the available portals below.
+        </div>
+
+        <!-- Login Section -->
+        <div id="login" class="login-section">
+            <h2>System Login</h2>
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="role">Access Role:</label>
+                    <select id="role" name="role">
+                        <option value="">-- Select a Role --</option>
+                        <option value="student">Student</option>
+                        <option value="faculty">Faculty/Instructor</option>
+                        <option value="financial">Financial Staff</option>
+                        <option value="registrar">Registrar</option>
+                        <option value="admin">Administrator</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="reset" class="btn btn-secondary">Clear</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Portals Section -->
+        <div id="portals" class="portals-section">
+            <h2>Available Portals</h2>
+
+            <div class="portals-grid">
+                <!-- Student Portal -->
+                <div class="portal-card">
+                    <h3>📚 Student Portal</h3>
+                    <p>Access your academic information, enrollment, and grades</p>
+                    <ul>
+                        <li>View enrolled courses</li>
+                        <li>Check grades and academic progress</li>
+                        <li>View degree requirements</li>
+                        <li>Download transcripts</li>
+                    </ul>
+                    <a href="javascript:alert('Student Portal - Requires authentication')" class="btn btn-primary">Enter Portal</a>
+                </div>
+
+                <!-- Billing Portal -->
+                <div class="portal-card">
+                    <h3>💳 Billing & Financial</h3>
+                    <p>Manage your account, invoices, and payment information</p>
+                    <ul>
+                        <li>View billing account</li>
+                        <li>Check invoices</li>
+                        <li>Make online payments</li>
+                        <li>Payment history</li>
+                    </ul>
+                    <a href="javascript:alert('Billing Portal - Requires authentication')" class="btn btn-primary">Enter Portal</a>
+                </div>
+
+                <!-- Course Management -->
+                <div class="portal-card">
+                    <h3>📖 Course Management</h3>
+                    <p>Browse courses, view schedules, and manage registrations</p>
+                    <ul>
+                        <li>Course catalog</li>
+                        <li>Class schedules</li>
+                        <li>Course registration</li>
+                        <li>Add/Drop courses</li>
+                    </ul>
+                    <a href="javascript:alert('Course Management - Requires authentication')" class="btn btn-primary">Enter Portal</a>
+                </div>
+
+                <!-- Administrative Portal -->
+                <div class="portal-card">
+                    <h3>⚙️ Administration</h3>
+                    <p>System administration, reports, and data management</p>
+                    <ul>
+                        <li>User management</li>
+                        <li>System reports</li>
+                        <li>Audit logs</li>
+                        <li>Configuration</li>
+                    </ul>
+                    <a href="javascript:alert('Admin Portal - Restricted Access')" class="btn btn-primary">Enter Portal</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div id="features" class="features-section">
+            <h2>System Features</h2>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <h4>🔒 Security First</h4>
+                    <p>Enterprise-grade authentication, encryption, and role-based access control to protect your data.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>⚡ Performance</h4>
+                    <p>Optimized database queries and connection pooling for fast, responsive performance.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>📊 Real-time Data</h4>
+                    <p>Direct access to current data from the mainframe DB2 database through secure APIs.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>📱 Responsive Design</h4>
+                    <p>Intuitive web-based interface accessible from any IBM-compatible PC.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>📋 Comprehensive Auditing</h4>
+                    <p>Complete audit trails for all transactions and data changes for compliance.</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>🔄 Seamless Integration</h4>
+                    <p>Bridges legacy COBOL systems and DB2 with modern web interfaces without disrupting operations.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div id="about" class="features-section">
+            <h2>About This System</h2>
+            <p style="margin-bottom: 15px;">
+                <strong>University One</strong> is a modern web-based portal system designed to provide students, faculty, and staff with convenient access to university services and data. This system represents a significant modernization effort to replace the traditional terminal-based interfaces with intuitive, web-enabled applications.
+            </p>
+
+            <h3 style="color: #003366; margin-top: 20px; margin-bottom: 10px; font-size: 16px;">System Architecture</h3>
+            <p style="margin-bottom: 15px;">
+                The system employs an API-First middleware architecture that bridges the gap between modern web interfaces and the legacy IBM AS/400 mainframe systems. This approach ensures:
+            </p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Data Consistency:</strong> Single source of truth maintained on the DB2 database</li>
+                <li><strong>Operational Continuity:</strong> Existing COBOL programs continue to operate</li>
+                <li><strong>Scalability:</strong> Support for growing number of concurrent users</li>
+                <li><strong>Security:</strong> Centralized authentication and authorization control</li>
+                <li><strong>Maintainability:</strong> Clear separation of concerns between layers</li>
+            </ul>
+
+            <h3 style="color: #003366; margin-top: 20px; margin-bottom: 10px; font-size: 16px;">Technical Details</h3>
+            <ul style="margin-left: 20px;">
+                <li><strong>Platform:</strong> IBM AS/400 (iSeries) with IBM i operating system</li>
+                <li><strong>Database:</strong> DB2 for iSeries with comprehensive schema</li>
+                <li><strong>API Layer:</strong> Secure gateway for data access and business logic</li>
+                <li><strong>Frontend:</strong> HTML/JavaScript web interface</li>
+                <li><strong>Access Pattern:</strong> ODBC gateway with connection pooling</li>
+            </ul>
+        </div>
+
+        <!-- Contact Section -->
+        <div id="contact" class="features-section">
+            <h2>Contact & Support</h2>
+            <p style="margin-bottom: 15px;">
+                For technical support, account issues, or general inquiries, please contact the appropriate department:
+            </p>
+
+            <div class="features-grid" style="margin-top: 20px;">
+                <div class="feature-item">
+                    <h4>📞 IT Support Desk</h4>
+                    <p><strong>Email:</strong> itsupport@university.edu<br>
+                    <strong>Phone:</strong> (555) 123-4567<br>
+                    <strong>Hours:</strong> Mon-Fri 8AM-5PM</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>💰 Billing Department</h4>
+                    <p><strong>Email:</strong> billing@university.edu<br>
+                    <strong>Phone:</strong> (555) 234-5678<br>
+                    <strong>Hours:</strong> Mon-Fri 9AM-4PM</p>
+                </div>
+
+                <div class="feature-item">
+                    <h4>📚 Registrar's Office</h4>
+                    <p><strong>Email:</strong> registrar@university.edu<br>
+                    <strong>Phone:</strong> (555) 345-6789<br>
+                    <strong>Hours:</strong> Mon-Fri 8AM-5PM</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 20px; color: #666; font-size: 12px;">
+                <strong>Note:</strong> For security reasons, never share your password with support staff. IT support will only request your username or student ID for account verification.
+            </p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>University One - Integrated Management System</strong></p>
+        <p>Copyright &copy; 1998 University One. All rights reserved.</p>
+        <p style="margin-top: 10px; color: #cccccc; font-size: 11px;">
+            System Status: Operational | Version: 1.0 | Last Updated: 1998
+        </p>
+    </div>
+
+    <script type="text/javascript">
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var role = document.getElementById('role').value;
+            
+            if (!username || !password || !role) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Simulate login (in real system, this would call API)
+            alert('Login attempt for user: ' + username + '\nRole: ' + role + '\n\nNote: This is a demonstration. Full authentication would be implemented in the API layer.');
+            
+            // Reset form
+            document.querySelector('.login-form').reset();
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function (e) {
+                var href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    var target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
