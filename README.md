@@ -1,75 +1,52 @@
 # Prompts4Liberty
 
-Prompts4Liberty is a personal repository for sharing prompts, service design practices, software architecture artifacts, and AI-native solution thinking with practical examples.
+Prompts4Liberty is Renato Barufi's working library of software architecture assessments, solution designs, AI and prompt experiments, and small Python games. The repository mixes English and Portuguese material and favors practical artifacts over polished implementations.
 
-## About the project
+## Contents
 
-This repository brings together materials focused on:
-- solution architecture and cloud-based system design
-- AI Architect Specialist thinking and AI-enabled product design
-- migration, automation, and modernization (MAM)
-- service catalog design, systems integration, and enterprise architecture
-- security review, governance, and observability
-- prompt engineering and applied AI use cases
+### Architecture library
 
-The goal is to create a practical knowledge base that supports architecture assessments, modernization plans, cloud solution designs, and AI-driven initiatives.
+The [`library/`](library/) directory contains architecture studies, service concepts, assessments, and design references organized by project:
+
+- [`library/apliance-repair-one/`](library/apliance-repair-one/) — appliance repair use cases and assessment material
+- [`library/gateway-one/`](library/gateway-one/) — payment gateway architecture, API management, data lake, integrations, security, and compliance assessments
+- [`library/insurance-one/`](library/insurance-one/) — insurance architecture, cloud budget planning, fraud prevention, and the [`seguro-simples.sql`](library/insurance-one/seguro-simples.sql) data model
+- [`library/logistic-one/`](library/logistic-one/) — retail logistics, WMS, ESB, CDC, fulfillment, inventory, reverse logistics, and seasonal operation studies
+- [`library/open-wings/`](library/open-wings/) — cloud architecture, security planning, deployment decisions, and microservice architecture guidance
+
+Notable starting points include:
+
+- [Software Architecture for Insurance on AWS](library/insurance-one/software-architecture-insurance-aws-cloud.md)
+- [Payment Gateway Software Architecture](library/gateway-one/gateway-pagamentos-arquitetura-software.md)
+- [Kong Gateway Assessment](library/gateway-one/assessment-kong-gateway.md)
+- [DB2 Historical Data Lake Assessment](library/gateway-one/assessment-datalake.md)
+- [Manhattan WMS Assessment](library/logistic-one/assessment-manhattan-wms.md)
+- [Scalable Microservices Architecture](library/open-wings/software-architecture.md)
+
+### Blog and prompt material
+
+The [`blog/`](blog/) directory contains articles and prompt-oriented explorations about AI architecture, business, weather applications, and product thinking:
+
+- [AI Architect Specialist](blog/ai-architect-specialist.md)
+- [Business One Series](blog/business-one-series.md)
+- [Business Coaching](blog/business_coaching.md)
+- [Weather Application](blog/app_weather.md)
+
+### Python game experiments
+
+- [`pygame-8bits/`](pygame-8bits/) — stock and commodity trading simulations, market prediction experiments, game instructions, and reusable game prompts
+- [`pygame-16bits/`](pygame-16bits/) — the *As Aventuras da Helena* adventure games, their prompts, and [`requirements.md`](pygame-16bits/requirements.md)
+
+The 8-bit projects include [`market_game.py`](pygame-8bits/market_game.py), [`commodities-trader-v2.py`](pygame-8bits/commodities-trader-v2.py), [`stock-prediction.py`](pygame-8bits/stock-prediction.py), and [`trading-simulator.py`](pygame-8bits/trading-simulator.py). The game configuration is in [`game_config.json`](pygame-8bits/game_config.json).
+
+## How to use this repository
+
+Browse the project folders for reference material, architecture discussion starters, and prompt examples. The Python files are exploratory games and simulations; inspect each folder's documentation and requirements before running them.
 
 ## Author
 
 [Renato Barufi](https://www.linkedin.com/in/renato-barufi-a2a7ab130/) — Solution Architect and AI Specialist
 
-## Architecture focus areas
+## Contributing
 
-This repository is organized around the kind of architecture products I work with most often:
-- architecture assessment
-- budget plan for a solution in the cloud
-- architecture solution for a specific use case in the cloud
-- architecture assessment for on-premise or cloud deployment
-- security review for a solution
-- modernization plan for a legacy system
-
-The work is guided by a big-picture view of systems integration, service catalogs, roadmap evolution, and technology as an enabler of business value.
-
-## What is included
-
-### Architecture and modernization
-- [blog/ai-architect-specialist.md](blog/ai-architect-specialist.md) — overview of the AI Architect Specialist role and its value in modern delivery teams
-- [library/insurance-one/software-architecture-insurance-aws-cloud.md](library/insurance-one/software-architecture-insurance-aws-cloud.md) — AWS-oriented software architecture for an insurance service
-- [library/insurance-one/budget-plan-insurance-aws-cloud.md](library/insurance-one/budget-plan-insurance-aws-cloud.md) — annual budget and operating model perspective for a cloud solution
-- [library/insurance-one/servico-anti-fraude.md](library/insurance-one/servico-anti-fraude.md) — fraud service concepts and supporting architecture ideas
-
-### Prompt engineering and AI use cases
-- [library/write-a-prompt.md](library/write-a-prompt.md) — guidance and examples for writing effective prompts
-- [library/book_recommendation.md](library/book_recommendation.md) — example prompt for book recommendations
-- [library/business_coaching.md](library/business_coaching.md) — business coaching prompt for digital ventures
-- [library/app_weather.md](library/app_weather.md) — prompt example for a weather application concept
-
-### Data, services, and experiments
-- [library/insurance-one/seguro-simples.sql](library/insurance-one/seguro-simples.sql) — relational model examples supporting insurance operations
-- [pygame-8bits/](pygame-8bits/) and [pygame-16bits/](pygame-16bits/) — playful experiments and Python-based game prompts
-
-## Repository structure
-
-- [library/](library/) — prompts, technical documents, and architecture references
-- [blog/](blog/) — articles and perspectives on architecture, prompts, and AI
-- [pygame-8bits/](pygame-8bits/) and [pygame-16bits/](pygame-16bits/) — experiments and application-oriented examples
-- [source/](source/) — utility scripts and local experiments
-
-## How to use this repository
-
-Use this repository as a reference library for:
-- shaping architecture conversations
-- drafting solution concepts and cloud designs
-- creating prompt-based workflows and AI-assisted content
-- exploring modernization journeys for legacy platforms
-- preparing security, budget, and observability discussions
-
-## Future directions
-
-Planned next steps include:
-- adding implementation examples in Node.js and Python for the documented services
-- converting the data models into working APIs
-- adding infrastructure-as-code examples for AWS
-- expanding the library with more real-world patterns for security, observability, and AI integration
-
-> All new content is being organized in English to reflect a more scalable and professional knowledge base.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for ways to provide feedback, suggest improvements, or collaborate on new material.

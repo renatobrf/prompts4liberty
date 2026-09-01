@@ -1,5 +1,5 @@
 # Avaliação de Arquitetura - DDD Domain-Driven Design
-## Plataforma Logística Segmentada por Domínios
+## Plataforma Varejo Segmentada por Domínios
 
 **Data da Avaliação:** 2026-09-01  
 **Versão:** 1.0  
