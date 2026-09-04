@@ -38,3 +38,6 @@ Panel about the current systems that we have to provide this logistic services f
 # ci/cd on-premisse and cloud
 - turn-on/off about non-prod env on critical events - like black friday
 - using all resources to production environment on critical events - like black friday
+
+# front-end estatico
+- CDN e cache de borda
