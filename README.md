@@ -1,4 +1,4 @@
-# Prompts4Liberty
+# Prompts 4 Liberty
 
 Prompts4Liberty is Renato Barufi's working library of software architecture assessments, solution designs, modernization plans, AI explorations, and prompt experiments. It favors practical artifacts and discussion starters over polished implementations. The repository contains material in English and Portuguese.
 
