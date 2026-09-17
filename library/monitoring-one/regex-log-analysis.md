@@ -31,6 +31,20 @@ Raw or semi-structured log
 
 ---
 
+## 🧱 Anatomy of a Log Line
+
+Most log lines follow predictable patterns:
+
+```
+2024-01-15 14:32:01.123 [ERROR] [order-service] OrderProcessor - Payment failed for orderId=98234 userId=441 amount=129.99
+│                        │       │               │               │
+timestamp               level   service         class           message + context
+```
+
+Regex works because **structure is consistent**. Once you learn your log format, you can extract anything.
+
+---
+
 ## 1. Purpose and Scope
 
 ### 1.1 Objectives
