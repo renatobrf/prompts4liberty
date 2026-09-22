@@ -1,1 +1,2 @@
 a huge example about the misunderstood for create a better solution looking for most complex and enterprise solution to provide java apps on sun solaris platform using risc architecture in a environment where nobody was able to maintain when the problems happen and course that its coming.
+the main business there was consulting selling outsourcing.
