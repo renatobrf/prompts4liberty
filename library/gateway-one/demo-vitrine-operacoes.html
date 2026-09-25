@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vitrine de Operação | Pagamentos</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafb;
+      --ink: #18242d;
+      --muted: #6d7b84;
+      --line: #dfe6ea;
+      --navy: #102b3b;
+      --teal: #0b8f83;
+      --teal-soft: #ddf4f0;
+      --orange: #d77931;
+      --orange-soft: #fff1e4;
+      --red: #c75252;
+      --red-soft: #fbe8e8;
+      --blue: #2878b8;
+      --blue-soft: #e5f1fb;
+      --shadow: 0 7px 22px rgba(20, 43, 57, .06);
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body { margin: 0; color: var(--ink); background: var(--bg); font: 13px/1.45 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+    button, select, input { font: inherit; }
+    button { cursor: pointer; }
+    .app { display: flex; min-height: 100vh; }
+    .sidebar { width: 244px; flex: 0 0 244px; padding: 20px 14px; color: #d4e2e7; background: var(--navy); }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 1px 12px 29px; }
+    .brand-mark { display: grid; place-items: center; width: 33px; height: 33px; color: white; background: var(--teal); border-radius: 9px; font-weight: 800; font-size: 17px; }
+    .brand strong { display: block; color: white; font-size: 14px; letter-spacing: .1px; }
+    .brand small { display: block; margin-top: 2px; color: #8da8b3; font-size: 10px; }
+    .workspace { margin: 0 8px 24px; padding: 10px 11px; border: 1px solid #315060; border-radius: 7px; background: #163746; }
+    .workspace-label { display: block; margin-bottom: 4px; color: #87a7b3; font-size: 10px; text-transform: uppercase; letter-spacing: .8px; }
+    .workspace-value { display: flex; justify-content: space-between; color: #fff; font-size: 12px; }
+    .nav-label { padding: 16px 12px 7px; color: #71909d; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+    .nav-item { display: flex; align-items: center; gap: 11px; width: 100%; padding: 10px 12px; color: #aac0c8; border: 0; border-radius: 6px; background: transparent; text-align: left; }
+    .nav-item:hover, .nav-item.active { color: #fff; background: #1b4557; }
+    .nav-item.active { box-shadow: inset 3px 0 var(--teal); }
+    .nav-icon { width: 16px; color: #8fb3bd; text-align: center; font-size: 15px; }
+    .nav-item.active .nav-icon { color: #64dbca; }
+    .side-footer { margin: 36px 10px 0; padding-top: 16px; border-top: 1px solid #2d4b58; color: #88a3ad; font-size: 11px; }
+    .dot { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: #4fc29d; box-shadow: 0 0 7px #4fc29d; }
+    .main { width: 100%; min-width: 0; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 66px; padding: 13px 30px; border-bottom: 1px solid var(--line); background: var(--surface); }
+    .topbar-title { color: var(--muted); font-size: 12px; }
+    .topbar-title b { color: var(--ink); font-weight: 600; }
+    .top-actions { display: flex; align-items: center; gap: 9px; }
+    .read-only { display: inline-flex; align-items: center; gap: 6px; padding: 7px 10px; color: #477263; border: 1px solid #b9dfd2; border-radius: 5px; background: #f0faf7; font-size: 11px; }
+    .top-btn, .period { min-height: 33px; padding: 7px 10px; color: #53636c; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); }
+    .top-btn:hover, .period:hover { border-color: #9bb2bc; color: var(--navy); }
+    .content { max-width: 1540px; margin: 0 auto; padding: 28px 30px 42px; }
+    .heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 22px; }
+    h1 { margin: 0; color: var(--navy); font-size: 25px; font-weight: 650; letter-spacing: -.5px; }
+    .subtitle { margin-top: 5px; color: var(--muted); }
+    .last-update { color: var(--muted); font-size: 11px; white-space: nowrap; }
+    .filters { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-bottom: 18px; padding: 11px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); box-shadow: var(--shadow); }
+    .filter-label { color: var(--muted); font-size: 11px; }
+    select { min-width: 127px; padding: 7px 24px 7px 8px; color: var(--ink); border: 1px solid var(--line); border-radius: 5px; background: var(--surface-soft); }
+    select:focus, button:focus-visible { outline: 2px solid #68bdb2; outline-offset: 1px; }
+    .filter-spacer { flex: 1; }
+    .clear-filter { padding: 6px 8px; color: var(--teal); border: 0; background: transparent; font-size: 11px; }
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 15px; }
+    .panel { min-width: 0; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 17px 11px; }
+    .panel-title { color: var(--navy); font-size: 14px; font-weight: 650; }
+    .panel-caption { color: var(--muted); font-size: 11px; }
+    .panel-link { padding: 0; color: var(--teal); border: 0; background: transparent; font-size: 11px; }
+    .kpi { grid-column: span 3; min-height: 130px; padding: 16px 17px; border-top: 3px solid var(--teal); }
+    .kpi:nth-child(2) { border-top-color: var(--blue); }
+    .kpi:nth-child(3) { border-top-color: var(--orange); }
+    .kpi:nth-child(4) { border-top-color: var(--red); }
+    .kpi-label { color: var(--muted); font-size: 12px; }
+    .kpi-value { margin: 8px 0 5px; color: var(--navy); font-size: 27px; font-weight: 650; letter-spacing: -.7px; }
+    .kpi-meta { color: var(--teal); font-size: 11px; }
+    .kpi-meta.neutral { color: var(--muted); }
+    .trend { grid-column: span 8; min-height: 312px; }
+    .health { grid-column: span 4; min-height: 312px; }
+    .operations { grid-column: span 7; }
+    .alerts { grid-column: span 5; }
+    .chart-wrap { padding: 3px 16px 15px; }
+    .chart { display: block; width: 100%; height: 218px; }
+    .chart-grid { stroke: #e5eaed; stroke-width: 1; }
+    .chart-label { fill: #87959d; font-size: 10px; }
+    .chart-area { fill: url(#chartFill); }
+    .chart-line { fill: none; stroke: var(--teal); stroke-width: 2.5; }
+    .chart-target { fill: none; stroke: #b8c9cf; stroke-width: 1.5; stroke-dasharray: 5 5; }
+    .chart-point { fill: white; stroke: var(--teal); stroke-width: 2; }
+    .legend { display: flex; gap: 13px; color: var(--muted); font-size: 10px; }
+    .legend i { display: inline-block; width: 8px; height: 8px; margin-right: 4px; border-radius: 50%; background: var(--teal); }
+    .legend i.target { background: #b8c9cf; }
+    .health-body { padding: 9px 17px 18px; }
+    .health-score { display: flex; align-items: center; gap: 15px; padding: 5px 0 17px; }
+    .score-ring { display: grid; place-items: center; width: 86px; height: 86px; border: 9px solid #c9eee7; border-right-color: var(--teal); border-radius: 50%; color: var(--navy); font-size: 19px; font-weight: 650; }
+    .score-copy strong { display: block; color: var(--navy); font-size: 14px; }
+    .score-copy span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .health-row { display: grid; grid-template-columns: 1fr 52px; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); color: #50616a; font-size: 11px; }
+    .health-row b { color: var(--navy); text-align: right; font-weight: 600; }
+    .health-bar { grid-column: 1 / -1; height: 5px; overflow: hidden; border-radius: 3px; background: #e8eef0; }
+    .health-bar span { display: block; height: 100%; border-radius: inherit; background: var(--teal); }
+    .health-bar span.warn { background: var(--orange); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th { padding: 9px 15px; color: #84919a; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 10px; font-weight: 700; letter-spacing: .55px; text-align: left; text-transform: uppercase; white-space: nowrap; }
+    td { padding: 12px 15px; color: #50616a; border-bottom: 1px solid #edf0f2; white-space: nowrap; }
+    tbody tr { transition: background .15s ease; }
+    tbody tr:hover { background: #f6fbfa; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .id { color: var(--blue); font-weight: 600; }
+    .subtext { display: block; margin-top: 2px; color: #8a989f; font-size: 10px; }
+    .right { text-align: right; }
+    .status { display: inline-flex; align-items: center; gap: 5px; padding: 4px 7px; border-radius: 4px; font-size: 10px; font-weight: 600; }
+    .status.ok { color: #347d69; background: var(--teal-soft); }
+    .status.warn { color: #a86424; background: var(--orange-soft); }
+    .status.danger { color: #a23f3f; background: var(--red-soft); }
+    .status.info { color: #256493; background: var(--blue-soft); }
+    .alert-item { display: grid; grid-template-columns: 8px 1fr auto; gap: 11px; align-items: start; padding: 13px 16px; border-top: 1px solid var(--line); }
+    .alert-severity { width: 8px; height: 8px; margin-top: 5px; border-radius: 50%; background: var(--orange); }
+    .alert-severity.critical { background: var(--red); box-shadow: 0 0 0 3px var(--red-soft); }
+    .alert-severity.normal { background: var(--teal); }
+    .alert-title { color: var(--navy); font-weight: 600; }
+    .alert-detail { margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .alert-time { color: #9aa6ac; font-size: 10px; white-space: nowrap; }
+    .flow { grid-column: span 12; padding-bottom: 17px; }
+    .flow-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; padding: 12px 18px 4px; }
+    .flow-step { position: relative; text-align: center; }
+    .flow-step:not(:last-child)::after { position: absolute; top: 17px; left: calc(50% + 20px); width: calc(100% - 40px); height: 2px; content: ""; background: #c5e4df; }
+    .flow-step.pending:not(:last-child)::after { background: #e7d9c9; }
+    .flow-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 35px; height: 35px; margin: 0 auto 8px; color: white; border-radius: 50%; background: var(--teal); font-weight: 700; }
+    .flow-step.pending .flow-icon { color: #a86d36; background: var(--orange-soft); border: 1px solid #f0c89f; }
+    .flow-step strong { display: block; color: var(--navy); font-size: 11px; }
+    .flow-step small { display: block; margin-top: 2px; color: var(--muted); font-size: 10px; }
+    .drawer-backdrop { position: fixed; inset: 0; z-index: 5; visibility: hidden; opacity: 0; background: rgba(16, 43, 59, .32); transition: opacity .2s ease, visibility .2s ease; }
+    .drawer-backdrop.open { visibility: visible; opacity: 1; }
+    .drawer { position: absolute; top: 0; right: 0; width: min(470px, 92vw); height: 100%; padding: 24px; overflow-y: auto; background: var(--surface); box-shadow: -10px 0 30px rgba(16, 43, 59, .18); transform: translateX(100%); transition: transform .25s ease; }
+    .drawer-backdrop.open .drawer { transform: translateX(0); }
+    .drawer-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 15px; padding-bottom: 19px; border-bottom: 1px solid var(--line); }
+    .drawer h2 { margin: 0; color: var(--navy); font-size: 19px; }
+    .drawer-close { width: 29px; height: 29px; color: var(--muted); border: 1px solid var(--line); border-radius: 5px; background: white; }
+    .drawer-section { padding: 18px 0; border-bottom: 1px solid var(--line); }
+    .drawer-section h3 { margin: 0 0 11px; color: var(--navy); font-size: 12px; text-transform: uppercase; letter-spacing: .7px; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .detail-label { display: block; color: var(--muted); font-size: 10px; }
+    .detail-value { display: block; margin-top: 2px; color: var(--ink); font-size: 12px; font-weight: 600; }
+    .timeline { display: grid; gap: 0; }
+    .timeline-item { position: relative; padding: 0 0 17px 22px; border-left: 1px solid #b9dcd6; }
+    .timeline-item:last-child { padding-bottom: 0; border-left-color: transparent; }
+    .timeline-item::before { position: absolute; top: 1px; left: -5px; width: 9px; height: 9px; content: ""; border: 2px solid white; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 1px var(--teal); }
+    .timeline-item.warn::before { background: var(--orange); box-shadow: 0 0 0 1px var(--orange); }
+    .timeline-time { color: var(--muted); font-size: 10px; }
+    .timeline-title { margin-top: 2px; color: var(--navy); font-size: 12px; font-weight: 600; }
+    .timeline-copy { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .demo-note { margin-top: 16px; padding: 9px 11px; color: #6a593f; border: 1px solid #ead6ba; border-radius: 5px; background: #fff8ed; font-size: 11px; }
+    @media (max-width: 1100px) {
+      .sidebar { width: 70px; flex-basis: 70px; padding: 20px 8px; }
+      .brand { justify-content: center; padding: 1px 0 29px; }
+      .brand-copy, .workspace, .nav-label, .nav-item span:not(.nav-icon), .side-footer { display: none; }
+      .nav-item { justify-content: center; padding: 12px 8px; }
+      .trend, .operations { grid-column: span 7; }
+      .health, .alerts { grid-column: span 5; }
+    }
+    @media (max-width: 730px) {
+      .topbar, .content { padding-left: 16px; padding-right: 16px; }
+      .heading { align-items: flex-start; flex-direction: column; }
+      .kpi { grid-column: span 6; }
+      .trend, .health, .operations, .alerts, .flow { grid-column: 1 / -1; }
+      .flow-steps { overflow-x: auto; grid-template-columns: repeat(5, 132px); }
+      .top-actions .read-only { display: none; }
+    }
+    @media (max-width: 440px) {
+      .sidebar { display: none; }
+      .topbar { min-height: 58px; }
+      .topbar-title { font-size: 11px; }
+      .top-btn { display: none; }
+      .kpi { min-height: 112px; padding: 12px; }
+      .kpi-value { font-size: 21px; }
+      .kpi-meta { font-size: 10px; }
+      .filter-label { width: 100%; }
+      select { flex: 1; min-width: 0; }
+      .filters .filter-spacer, .clear-filter { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegação da vitrine">
+      <div class="brand"><div class="brand-mark">V</div><div class="brand-copy"><strong>Vitrine de Operação</strong><small>Operational Intelligence</small></div></div>
+      <div class="workspace"><span class="workspace-label">Tenant demonstrativo</span><span class="workspace-value">Liberty Commerce <b>⌄</b></span></div>
+      <div class="nav-label">Monitoramento</div>
+      <button class="nav-item active"><span class="nav-icon">▦</span><span>Visão geral</span></button>
+      <button class="nav-item"><span class="nav-icon">⌁</span><span>Operação em tempo real</span></button>
+      <button class="nav-item"><span class="nav-icon">↔</span><span>Transações</span></button>
+      <button class="nav-item"><span class="nav-icon">▤</span><span>Arquivos e Hiker</span></button>
+      <div class="nav-label">Financeiro</div>
+      <button class="nav-item"><span class="nav-icon">◈</span><span>Liquidação e conciliação</span></button>
+      <button class="nav-item"><span class="nav-icon">△</span><span>Risco e compliance</span></button>
+      <div class="nav-label">Gestão</div>
+      <button class="nav-item"><span class="nav-icon">!</span><span>Alertas e incidentes</span></button>
+      <button class="nav-item"><span class="nav-icon">▧</span><span>Relatórios</span></button>
+      <div class="side-footer"><span class="dot"></span>Gateway conectado<br><span style="margin-left:13px">latência da fonte: 42 ms</span></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title">Vitrine de Operação <span>/</span> <b>Visão geral</b></div>
+        <div class="top-actions"><span class="read-only">● Somente leitura</span><button class="period" id="periodButton">Últimas 24 horas⌄</button><button class="top-btn" id="refreshButton" title="Atualizar dados">↻</button><button class="top-btn" title="Perfil do usuário">RC</button></div>
+      </header>
+
+      <section class="content">
+        <div class="heading"><div><h1>Olá, Renato. Esta é a saúde da sua operação.</h1><div class="subtitle">Pagamentos, liquidação e conciliação em uma visão única para decisão.</div></div><div class="last-update" id="lastUpdate">Atualizado há 2 min · dados sintéticos</div></div>
+        <div class="filters" aria-label="Filtros globais"><span class="filter-label">Filtrar por</span><select id="partnerFilter"><option>Todos os parceiros</option><option>Adquirente Alpha</option><option>Banco Horizonte</option><option>Pix Hub</option></select><select><option>Todos os canais</option><option>API</option><option>Arquivo SFTP</option><option>Portal</option></select><select><option>Todos os meios</option><option>Pix</option><option>Cartão</option><option>Boleto</option></select><div class="filter-spacer"></div><button class="clear-filter" id="clearFilter">Limpar filtros</button></div>
+
+        <div class="grid">
+          <article class="panel kpi"><span class="kpi-label">Valor processado</span><div class="kpi-value">R$ 4,82 mi</div><div class="kpi-meta">▲ 8,6% <span class="kpi-meta neutral">vs. período anterior</span></div></article>
+          <article class="panel kpi"><span class="kpi-label">Taxa de autorização</span><div class="kpi-value">94,7%</div><div class="kpi-meta">▲ 1,8 p.p. <span class="kpi-meta neutral">acima da meta</span></div></article>
+          <article class="panel kpi"><span class="kpi-label">Valor liquidado</span><div class="kpi-value">R$ 3,96 mi</div><div class="kpi-meta neutral">82,1% do processado</div></article>
+          <article class="panel kpi"><span class="kpi-label">Incidentes abertos</span><div class="kpi-value">03</div><div class="kpi-meta" style="color:var(--red)">1 crítico <span class="kpi-meta neutral">requer atenção</span></div></article>
+
+          <article class="panel trend"><div class="panel-head"><div><div class="panel-title">Volume financeiro processado</div><div class="panel-caption">Valor bruto por hora · últimos 24h</div></div><div class="legend"><span><i></i>Realizado</span><span><i class="target"></i>Meta</span></div></div><div class="chart-wrap"><svg class="chart" viewBox="0 0 800 218" preserveAspectRatio="none" role="img" aria-label="Volume financeiro processado nas últimas 24 horas"><defs><linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b8f83" stop-opacity=".24"/><stop offset="1" stop-color="#0b8f83" stop-opacity="0"/></linearGradient></defs><line class="chart-grid" x1="42" y1="22" x2="790" y2="22"/><line class="chart-grid" x1="42" y1="67" x2="790" y2="67"/><line class="chart-grid" x1="42" y1="112" x2="790" y2="112"/><line class="chart-grid" x1="42" y1="157" x2="790" y2="157"/><text class="chart-label" x="3" y="26">R$ 400k</text><text class="chart-label" x="8" y="71">R$ 300k</text><text class="chart-label" x="8" y="116">R$ 200k</text><text class="chart-label" x="8" y="161">R$ 100k</text><path class="chart-target" d="M42 119 L166 119 L291 112 L416 112 L540 103 L665 94 L790 94"/><path class="chart-area" d="M42 148 L104 139 L166 145 L228 120 L291 128 L353 105 L416 119 L478 90 L540 84 L602 52 L665 73 L727 34 L790 44 L790 175 L42 175 Z"/><polyline class="chart-line" points="42,148 104,139 166,145 228,120 291,128 353,105 416,119 478,90 540,84 602,52 665,73 727,34 790,44"/><g class="chart-label"><text x="34" y="198">00h</text><text x="155" y="198">04h</text><text x="280" y="198">08h</text><text x="405" y="198">12h</text><text x="530" y="198">16h</text><text x="655" y="198">20h</text><text x="765" y="198">Agora</text></g><circle class="chart-point" cx="790" cy="44" r="4"/></svg></div></article>
+
+          <article class="panel health"><div class="panel-head"><div><div class="panel-title">Saúde da operação</div><div class="panel-caption">Indicadores certificados</div></div><button class="panel-link">Ver detalhes →</button></div><div class="health-body"><div class="health-score"><div class="score-ring">92</div><div class="score-copy"><strong>Operação saudável</strong><span>Score ponderado de disponibilidade, sucesso e frescor.</span></div></div><div class="health-row"><span>Disponibilidade dos canais</span><b>99,92%</b><div class="health-bar"><span style="width:99.92%"></span></div></div><div class="health-row"><span>Eventos dentro do SLA</span><b>97,4%</b><div class="health-bar"><span style="width:97.4%"></span></div></div><div class="health-row"><span>Reconciliação de valores</span><b>99,1%</b><div class="health-bar"><span class="warn" style="width:99.1%"></span></div></div></div></article>
+
+          <article class="panel operations"><div class="panel-head"><div><div class="panel-title">Operação por etapa</div><div class="panel-caption">Visão consolidada do ciclo de pagamento</div></div><button class="panel-link">Abrir cockpit →</button></div><div class="table-wrap"><table><thead><tr><th>Etapa</th><th class="right">Quantidade</th><th class="right">Valor</th><th>Status</th><th>Variação</th></tr></thead><tbody><tr><td><span class="id">Submetidas</span><span class="subtext">Todas as entradas recebidas</span></td><td class="right">28.416</td><td class="right">R$ 4,82 mi</td><td><span class="status ok">● Normal</span></td><td class="kpi-meta">▲ 8,6%</td></tr><tr><td><span class="id">Autorizadas</span><span class="subtext">Aprovadas pelo parceiro</span></td><td class="right">26.912</td><td class="right">R$ 4,57 mi</td><td><span class="status ok">● Normal</span></td><td class="kpi-meta">▲ 10,2%</td></tr><tr><td><span class="id">Em processamento</span><span class="subtext">Aguardando retorno</span></td><td class="right">1.021</td><td class="right">R$ 142,8 mil</td><td><span class="status warn">● Atenção</span></td><td style="color:var(--orange)">▲ 18,4%</td></tr><tr><td><span class="id">Negadas</span><span class="subtext">Falha ou recusa</span></td><td class="right">483</td><td class="right">R$ 106,2 mil</td><td><span class="status danger">● Investigar</span></td><td style="color:var(--red)">▲ 4,1%</td></tr></tbody></table></div></article>
+
+          <article class="panel alerts"><div class="panel-head"><div><div class="panel-title">Alertas que precisam de contexto</div><div class="panel-caption">3 incidentes ativos · últimos eventos</div></div><button class="panel-link" id="viewAlerts">Ver todos →</button></div><div class="alert-item"><span class="alert-severity critical"></span><div><div class="alert-title">Queda de autorização · Adquirente Alpha</div><div class="alert-detail">Taxa em 86,2%, abaixo do limiar de 90% · impacto estimado R$ 38,4 mil</div></div><span class="alert-time">há 12 min</span></div><div class="alert-item"><span class="alert-severity"></span><div><div class="alert-title">Conciliação pendente · lote 88421</div><div class="alert-detail">Diferença de R$ 12.840 aguardando retorno do parceiro</div></div><span class="alert-time">há 34 min</span></div><div class="alert-item"><span class="alert-severity normal"></span><div><div class="alert-title">Arquivo recebido fora da janela</div><div class="alert-detail">Layout CNAB · Banco Horizonte · atraso de 8 minutos</div></div><span class="alert-time">há 1h</span></div></article>
+
+          <article class="panel flow"><div class="panel-head"><div><div class="panel-title">Jornada financeira</div><div class="panel-caption">Do evento transacional à conciliação</div></div><button class="panel-link" id="openTransaction">Investigar transação →</button></div><div class="flow-steps"><div class="flow-step"><div class="flow-icon">✓</div><strong>Recebido</strong><small>28.416 eventos</small></div><div class="flow-step"><div class="flow-icon">✓</div><strong>Autorizado</strong><small>26.912 aprovados</small></div><div class="flow-step"><div class="flow-icon">✓</div><strong>Liquidado</strong><small>R$ 3,96 mi</small></div><div class="flow-step pending"><div class="flow-icon">!</div><strong>Conciliado</strong><small>1 lote pendente</small></div><div class="flow-step pending"><div class="flow-icon">→</div><strong>Disponível</strong><small>Próximo ciclo 18:00</small></div></div></article>
+        </div>
+        <div class="demo-note">Ambiente demonstrativo · dados sintéticos para apresentação comercial. A Vitrine é somente leitura e não altera transações, arquivos ou liquidações no Gateway.</div>
+      </section>
+    </main>
+  </div>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><div class="drawer-head"><div><h2 id="drawerTitle">Detalhe da transação</h2><span class="subtext">Linha do tempo e evidências operacionais</span></div><button class="drawer-close" id="closeDrawer" aria-label="Fechar">×</button></div><div class="drawer-section"><h3>Resumo financeiro</h3><div class="detail-grid"><div><span class="detail-label">Identificador</span><span class="detail-value">TX-20260925-88421</span></div><div><span class="detail-label">Status atual</span><span class="detail-value"><span class="status warn">● Em processamento</span></span></div><div><span class="detail-label">Valor</span><span class="detail-value">R$ 1.248,90</span></div><div><span class="detail-label">Meio de pagamento</span><span class="detail-value">Cartão · crédito</span></div><div><span class="detail-label">Parceiro</span><span class="detail-value">Adquirente Alpha</span></div><div><span class="detail-label">Canal</span><span class="detail-value">API / checkout</span></div></div></div><div class="drawer-section"><h3>Linha do tempo</h3><div class="timeline"><div class="timeline-item"><span class="timeline-time">25 set · 14:20:03</span><div class="timeline-title">Transação recebida</div><div class="timeline-copy">Evento validado pelo Gateway e aceito para processamento.</div></div><div class="timeline-item"><span class="timeline-time">25 set · 14:20:04</span><div class="timeline-title">Enviada ao parceiro</div><div class="timeline-copy">Requisição encaminhada com correlation_id preservado.</div></div><div class="timeline-item warn"><span class="timeline-time">25 set · 14:20:31</span><div class="timeline-title">Aguardando retorno</div><div class="timeline-copy">Tempo de resposta acima do padrão do parceiro.</div></div></div></div><div class="drawer-section"><h3>Metadados de investigação</h3><div class="detail-grid"><div><span class="detail-label">Correlation ID</span><span class="detail-value">corr-7a91…c42</span></div><div><span class="detail-label">Tempo decorrido</span><span class="detail-value">31 segundos</span></div><div><span class="detail-label">Regra relacionada</span><span class="detail-value">LATENCY_PARTNER_P95</span></div><div><span class="detail-label">Dados sensíveis</span><span class="detail-value">Mascarados</span></div></div></div><div class="demo-note">Ações financeiras continuam disponíveis somente nos serviços oficiais do Gateway. Esta tela permite investigar e abrir um chamado.</div></aside></div>
+
+  <script>
+    const drawerBackdrop = document.querySelector('#drawerBackdrop');
+    const openTransaction = document.querySelector('#openTransaction');
+    const closeDrawer = document.querySelector('#closeDrawer');
+    const refreshButton = document.querySelector('#refreshButton');
+    const lastUpdate = document.querySelector('#lastUpdate');
+    const clearFilter = document.querySelector('#clearFilter');
+    const partnerFilter = document.querySelector('#partnerFilter');
+
+    function showDrawer() { drawerBackdrop.classList.add('open'); }
+    function hideDrawer() { drawerBackdrop.classList.remove('open'); }
+    function refreshDashboard() {
+      lastUpdate.textContent = 'Atualizando dados...';
+      refreshButton.textContent = '…';
+      window.setTimeout(() => { lastUpdate.textContent = 'Atualizado agora · dados sintéticos'; refreshButton.textContent = '↻'; }, 650);
+    }
+    openTransaction.addEventListener('click', showDrawer);
+    document.querySelector('#viewAlerts').addEventListener('click', showDrawer);
+    closeDrawer.addEventListener('click', hideDrawer);
+    drawerBackdrop.addEventListener('click', event => { if (event.target === drawerBackdrop) hideDrawer(); });
+    document.addEventListener('keydown', event => { if (event.key === 'Escape') hideDrawer(); });
+    refreshButton.addEventListener('click', refreshDashboard);
+    clearFilter.addEventListener('click', () => { partnerFilter.selectedIndex = 0; lastUpdate.textContent = 'Atualizado há 2 min · dados sintéticos'; });
+    document.querySelectorAll('.nav-item').forEach(item => item.addEventListener('click', () => { document.querySelector('.nav-item.active').classList.remove('active'); item.classList.add('active'); }));
+  </script>
+</body>
+</html>
