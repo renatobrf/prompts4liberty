@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Retail Pulse | Best Sellers</title>
+  <style>
+    :root {
+      --grafana: #f2495c;
+      --blue: #5794f2;
+      --cyan: #73bf69;
+      --amber: #f2cc0c;
+      --ink: #d8d9da;
+      --muted: #8b8d91;
+      --canvas: #111217;
+      --panel: #181b1f;
+      --panel-deep: #141619;
+      --line: #2e3238;
+      --good: #56a64b;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--canvas); }
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background: radial-gradient(circle at 72% -10%, #252936 0, var(--canvas) 37rem);
+      font: 13px/1.4 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, select { font: inherit; }
+    button { cursor: pointer; }
+
+    .app { display: flex; min-height: 100vh; }
+    .sidebar {
+      width: 224px;
+      flex: 0 0 224px;
+      min-height: 100vh;
+      padding: 18px 12px;
+      background: #0d0e10;
+      border-right: 1px solid #292c32;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 4px 10px 27px; }
+    .brand-mark {
+      display: grid; place-items: center; width: 30px; height: 30px;
+      color: white; background: var(--grafana); border-radius: 5px; font-weight: 800; font-size: 18px;
+    }
+    .brand strong { color: #f0f1f2; font-size: 15px; letter-spacing: .2px; }
+    .brand span { display: block; color: var(--muted); font-size: 10px; margin-top: 1px; }
+    .nav-label { padding: 16px 10px 7px; color: #656a72; font-size: 10px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; }
+    .nav-item {
+      display: flex; align-items: center; gap: 11px; width: 100%; padding: 9px 10px;
+      color: #9b9da3; border: 0; border-radius: 3px; background: transparent; text-align: left;
+    }
+    .nav-item:hover, .nav-item.active { color: #fff; background: #25282e; }
+    .nav-item.active { box-shadow: inset 3px 0 var(--grafana); }
+    .nav-icon { width: 16px; text-align: center; color: #70757d; font-size: 15px; }
+    .nav-item.active .nav-icon { color: var(--grafana); }
+    .side-status { margin: 38px 10px 0; padding-top: 15px; border-top: 1px solid #292c32; color: #70757d; font-size: 11px; }
+    .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--good); box-shadow: 0 0 8px var(--good); }
+
+    .main { width: 100%; min-width: 0; padding-bottom: 30px; }
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px;
+      padding: 13px 27px; border-bottom: 1px solid #292c32; background: rgba(17,18,23,.8);
+    }
+    .crumbs { color: #777b82; font-size: 12px; }
+    .crumbs b { color: #e4e5e6; font-weight: 500; }
+    .top-actions { display: flex; align-items: center; gap: 9px; }
+    .time-range, .icon-button {
+      display: inline-flex; align-items: center; gap: 7px; min-height: 32px; padding: 6px 10px;
+      border: 1px solid #3a3e45; border-radius: 3px; color: #c5c7ca; background: #202328;
+    }
+    .icon-button { width: 33px; justify-content: center; padding: 0; color: #9a9ea5; }
+    .icon-button:hover, .time-range:hover { border-color: #6b7079; color: white; }
+
+    .content { max-width: 1500px; margin: 0 auto; padding: 24px 27px; }
+    .heading { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 21px; }
+    h1 { margin: 0; color: #f2f3f4; font-size: 23px; font-weight: 500; letter-spacing: -.3px; }
+    .subtitle { margin-top: 4px; color: var(--muted); }
+    .refresh-state { color: #858991; font-size: 11px; white-space: nowrap; }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 17px; padding: 12px; border: 1px solid var(--line); border-radius: 3px; background: var(--panel-deep); }
+    .filter { display: flex; align-items: center; gap: 7px; color: #858991; }
+    select { min-width: 130px; padding: 7px 26px 7px 9px; color: #d7d9db; border: 1px solid #3a3e45; border-radius: 3px; background: #24272c; }
+    select:focus { outline: 1px solid var(--blue); }
+
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 13px; }
+    .panel { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 3px; background: var(--panel); box-shadow: 0 1px 2px #0005; }
+    .kpi { grid-column: span 3; min-height: 124px; padding: 15px 17px; border-top: 2px solid var(--blue); }
+    .kpi:nth-child(2) { border-top-color: var(--cyan); }
+    .kpi:nth-child(3) { border-top-color: var(--amber); }
+    .kpi:nth-child(4) { border-top-color: var(--grafana); }
+    .panel-head { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 13px 15px 9px; }
+    .panel-title { color: #e4e5e7; font-size: 13px; font-weight: 500; }
+    .panel-menu { color: #777c83; font-size: 17px; }
+    .kpi-label { color: #a2a4a8; font-size: 12px; }
+    .kpi-value { margin-top: 7px; color: #f3f4f5; font-size: 28px; font-weight: 400; letter-spacing: -.7px; }
+    .kpi-meta { margin-top: 6px; color: var(--good); font-size: 11px; }
+    .kpi-meta.neutral { color: #8f949b; }
+
+    .trend { grid-column: span 8; min-height: 282px; }
+    .category { grid-column: span 4; min-height: 282px; }
+    .rankings { grid-column: span 7; }
+    .channels { grid-column: span 5; }
+    .chart-wrap { padding: 4px 15px 14px; }
+    .chart { display: block; width: 100%; height: 205px; }
+    .chart-grid { stroke: #30343b; stroke-width: 1; }
+    .chart-label { fill: #777c83; font-size: 10px; }
+    .chart-area { fill: url(#area); }
+    .chart-line { fill: none; stroke: var(--blue); stroke-width: 2.5; }
+    .chart-point { fill: var(--panel); stroke: var(--blue); stroke-width: 2; }
+    .legend { display: flex; gap: 16px; color: #92969d; font-size: 11px; }
+    .legend i { display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: var(--blue); }
+    .legend i.green { background: var(--cyan); }
+    .bars { display: grid; gap: 13px; padding: 8px 16px 19px; }
+    .bar-row { display: grid; grid-template-columns: 96px 1fr 42px; gap: 8px; align-items: center; color: #a3a6aa; font-size: 11px; }
+    .bar-track { height: 12px; overflow: hidden; border-radius: 2px; background: #292d33; }
+    .bar-fill { height: 100%; border-radius: 2px; background: var(--grafana); }
+    .bar-row:nth-child(2) .bar-fill { background: var(--blue); }
+    .bar-row:nth-child(3) .bar-fill { background: var(--amber); }
+    .bar-row:nth-child(4) .bar-fill { background: var(--cyan); }
+    .bar-row:nth-child(5) .bar-fill { background: #b877d9; }
+    .bar-value { color: #d5d7d9; text-align: right; }
+
+    table { width: 100%; border-collapse: collapse; }
+    th { padding: 8px 15px; color: #777c83; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 10px; font-weight: 600; letter-spacing: .55px; text-align: left; text-transform: uppercase; }
+    td { padding: 11px 15px; color: #c6c8cb; border-bottom: 1px solid #292c31; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    tbody tr:hover { background: #202328; }
+    .rank { width: 37px; color: #777c83; }
+    .product { color: #e4e5e7; font-weight: 500; }
+    .sku { display: block; color: #777c83; font-size: 10px; font-weight: 400; }
+    .category-tag { color: #a7abb0; font-size: 11px; }
+    .right { text-align: right; }
+    .growth { color: var(--good); font-size: 11px; }
+    .channel-row { display: flex; align-items: center; gap: 11px; padding: 12px 15px; border-bottom: 1px solid #292c31; }
+    .channel-row:last-child { border-bottom: 0; }
+    .channel-icon { display: grid; place-items: center; width: 28px; height: 28px; color: #bdc0c4; border: 1px solid #3a3e45; border-radius: 3px; background: #22252a; font-size: 12px; }
+    .channel-name { flex: 1; color: #d6d8da; }
+    .channel-name small { display: block; color: #7d8188; font-size: 10px; }
+    .channel-total { color: #e3e4e6; font-weight: 500; }
+    .panel-foot { padding: 10px 15px; color: #81858c; border-top: 1px solid var(--line); font-size: 11px; }
+    .pipeline { display: flex; align-items: center; gap: 8px; padding: 10px 15px 0; color: #9da1a6; font-size: 11px; }
+
+    @media (max-width: 1050px) {
+      .sidebar { width: 70px; flex-basis: 70px; padding: 18px 8px; }
+      .brand { justify-content: center; padding: 4px 0 27px; }
+      .brand-copy, .nav-label, .nav-item span:not(.nav-icon), .side-status { display: none; }
+      .nav-item { justify-content: center; padding: 11px 8px; }
+      .trend, .rankings { grid-column: span 7; }
+      .category, .channels { grid-column: span 5; }
+    }
+    @media (max-width: 720px) {
+      .topbar, .content { padding-left: 15px; padding-right: 15px; }
+      .heading { align-items: flex-start; flex-direction: column; }
+      .kpi { grid-column: span 6; }
+      .trend, .category, .rankings, .channels { grid-column: 1 / -1; }
+      .time-range { display: none; }
+      th, td { padding-left: 10px; padding-right: 10px; }
+      .table-category { display: none; }
+    }
+    @media (max-width: 430px) {
+      .sidebar { display: none; }
+      .kpi { min-height: 111px; padding: 12px; }
+      .kpi-value { font-size: 22px; }
+      .kpi-meta { font-size: 10px; }
+      .bar-row { grid-template-columns: 77px 1fr 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-mark">R</div>
+        <div class="brand-copy"><strong>Retail Pulse</strong><span>observabilidade comercial</span></div>
+      </div>
+      <div class="nav-label">Dashboards</div>
+      <button class="nav-item active"><span class="nav-icon">▦</span><span>Best Sellers</span></button>
+      <button class="nav-item"><span class="nav-icon">⌁</span><span>Vendas em tempo real</span></button>
+      <button class="nav-item"><span class="nav-icon">◫</span><span>Mix de categorias</span></button>
+      <div class="nav-label">Operação</div>
+      <button class="nav-item"><span class="nav-icon">◉</span><span>Saúde do pipeline</span></button>
+      <button class="nav-item"><span class="nav-icon">△</span><span>Alertas</span></button>
+      <div class="side-status"><span class="status-dot"></span>Todos os serviços operacionais</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumbs">Dashboards <span>/</span> <b>Retail Pulse / Best Sellers</b></div>
+        <div class="top-actions">
+          <button class="time-range" id="rangeButton">◷ &nbsp;Últimos 7 dias <span>⌄</span></button>
+          <button class="icon-button" id="refreshButton" title="Atualizar dados" aria-label="Atualizar dados">↻</button>
+          <button class="icon-button" title="Mais opções" aria-label="Mais opções">⋮</button>
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="heading">
+          <div><h1>Best Sellers · Plataforma de varejo</h1><div class="subtitle">Visão executiva de vendas, ranking de produtos e mix comercial</div></div>
+          <div class="refresh-state" id="refreshState">Atualizado há 2 min · fonte: Kafka / OLAP</div>
+        </div>
+
+        <div class="filters" aria-label="Filtros do dashboard">
+          <label class="filter">Período <select id="periodFilter"><option>Últimos 7 dias</option><option>Hoje</option><option>Últimos 30 dias</option><option>Este trimestre</option></select></label>
+          <label class="filter">Canal <select id="channelFilter"><option>Todos os canais</option><option>E-commerce</option><option>Lojas físicas</option><option>Marketplace</option></select></label>
+          <label class="filter">Categoria <select id="categoryFilter"><option>Todas as categorias</option><option>Eletrônicos</option><option>Casa & decoração</option><option>Vestuário</option><option>Beleza</option></select></label>
+          <label class="filter">Região <select><option>Todo o Brasil</option><option>Sudeste</option><option>Sul</option><option>Nordeste</option></select></label>
+        </div>
+
+        <div class="grid">
+          <article class="panel kpi"><div class="kpi-label">Faturamento bruto</div><div class="kpi-value">R$ 842,6 mil</div><div class="kpi-meta">▲ 18,4% <span class="neutral">vs. período anterior</span></div></article>
+          <article class="panel kpi"><div class="kpi-label">Unidades vendidas</div><div class="kpi-value">18.492</div><div class="kpi-meta">▲ 12,7% <span class="neutral">vs. período anterior</span></div></article>
+          <article class="panel kpi"><div class="kpi-label">Ticket médio</div><div class="kpi-value">R$ 178,40</div><div class="kpi-meta">▲ 4,9% <span class="neutral">vs. período anterior</span></div></article>
+          <article class="panel kpi"><div class="kpi-label">Produtos ativos vendidos</div><div class="kpi-value">2.847</div><div class="kpi-meta neutral">96,2% do catálogo disponível</div></article>
+
+          <article class="panel trend">
+            <div class="panel-head"><div class="panel-title">Evolução de vendas</div><div class="legend"><span><i></i>Faturamento</span><span><i class="green"></i>Meta</span><span class="panel-menu">⋮</span></div></div>
+            <div class="chart-wrap">
+              <svg class="chart" viewBox="0 0 760 205" role="img" aria-label="Gráfico de evolução de vendas nos últimos sete dias" preserveAspectRatio="none">
+                <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5794f2" stop-opacity=".30"/><stop offset="1" stop-color="#5794f2" stop-opacity="0"/></linearGradient></defs>
+                <line class="chart-grid" x1="34" y1="24" x2="750" y2="24"/><line class="chart-grid" x1="34" y1="74" x2="750" y2="74"/><line class="chart-grid" x1="34" y1="124" x2="750" y2="124"/><line class="chart-grid" x1="34" y1="174" x2="750" y2="174"/>
+                <text class="chart-label" x="0" y="28">160k</text><text class="chart-label" x="0" y="78">120k</text><text class="chart-label" x="7" y="128">80k</text><text class="chart-label" x="7" y="178">40k</text>
+                <path class="chart-area" d="M34 137 L153 112 L272 125 L391 73 L510 91 L629 44 L750 59 L750 184 L34 184 Z"/>
+                <polyline class="chart-line" points="34,137 153,112 272,125 391,73 510,91 629,44 750,59"/>
+                <g class="chart-label"><text x="29" y="201">19 set</text><text x="148" y="201">20 set</text><text x="267" y="201">21 set</text><text x="386" y="201">22 set</text><text x="505" y="201">23 set</text><text x="624" y="201">24 set</text><text x="720" y="201">Hoje</text></g>
+                <circle class="chart-point" cx="34" cy="137" r="4"/><circle class="chart-point" cx="153" cy="112" r="4"/><circle class="chart-point" cx="272" cy="125" r="4"/><circle class="chart-point" cx="391" cy="73" r="4"/><circle class="chart-point" cx="510" cy="91" r="4"/><circle class="chart-point" cx="629" cy="44" r="4"/><circle class="chart-point" cx="750" cy="59" r="4"/>
+              </svg>
+            </div>
+          </article>
+
+          <article class="panel category"><div class="panel-head"><div class="panel-title">Faturamento por categoria</div><span class="panel-menu">⋮</span></div><div class="bars">
+            <div class="bar-row"><span>Eletrônicos</span><div class="bar-track"><div class="bar-fill" style="width: 92%"></div></div><span class="bar-value">32%</span></div>
+            <div class="bar-row"><span>Casa</span><div class="bar-track"><div class="bar-fill" style="width: 71%"></div></div><span class="bar-value">25%</span></div>
+            <div class="bar-row"><span>Vestuário</span><div class="bar-track"><div class="bar-fill" style="width: 58%"></div></div><span class="bar-value">20%</span></div>
+            <div class="bar-row"><span>Beleza</span><div class="bar-track"><div class="bar-fill" style="width: 39%"></div></div><span class="bar-value">14%</span></div>
+            <div class="bar-row"><span>Outros</span><div class="bar-track"><div class="bar-fill" style="width: 25%"></div></div><span class="bar-value">9%</span></div>
+          </div><div class="panel-foot">Participação no faturamento do período</div></article>
+
+          <article class="panel rankings"><div class="panel-head"><div class="panel-title">Top 10 produtos mais vendidos</div><span class="panel-menu">⋮</span></div>
+            <table><thead><tr><th>#</th><th>Produto</th><th class="table-category">Categoria</th><th class="right">Unidades</th><th class="right">Receita</th><th class="right">Variação</th></tr></thead><tbody id="rankingBody">
+              <tr><td class="rank">01</td><td class="product">Smartphone Nova X12<span class="sku">SKU 98301</span></td><td class="category-tag table-category">Eletrônicos</td><td class="right">1.248</td><td class="right">R$ 374.400</td><td class="right growth">▲ 23,1%</td></tr>
+              <tr><td class="rank">02</td><td class="product">Fone Pulse ANC<span class="sku">SKU 77104</span></td><td class="category-tag table-category">Eletrônicos</td><td class="right">986</td><td class="right">R$ 118.320</td><td class="right growth">▲ 18,7%</td></tr>
+              <tr><td class="rank">03</td><td class="product">Cafeteira Aroma Pro<span class="sku">SKU 45022</span></td><td class="category-tag table-category">Casa & decoração</td><td class="right">742</td><td class="right">R$ 96.460</td><td class="right growth">▲ 11,2%</td></tr>
+              <tr><td class="rank">04</td><td class="product">Tênis Move 2.0<span class="sku">SKU 33418</span></td><td class="category-tag table-category">Vestuário</td><td class="right">698</td><td class="right">R$ 83.760</td><td class="right growth">▲ 9,8%</td></tr>
+              <tr><td class="rank">05</td><td class="product">Smart TV Vision 55<span class="sku">SKU 11209</span></td><td class="category-tag table-category">Eletrônicos</td><td class="right">381</td><td class="right">R$ 76.200</td><td class="right growth">▲ 7,4%</td></tr>
+              <tr><td class="rank">06</td><td class="product">Kit Skincare Essencial<span class="sku">SKU 60831</span></td><td class="category-tag table-category">Beleza</td><td class="right">512</td><td class="right">R$ 61.440</td><td class="right growth">▲ 6,9%</td></tr>
+              <tr><td class="rank">07</td><td class="product">Mochila Urban Daily<span class="sku">SKU 22913</span></td><td class="category-tag table-category">Vestuário</td><td class="right">429</td><td class="right">R$ 51.480</td><td class="right growth">▲ 5,1%</td></tr>
+              <tr><td class="rank">08</td><td class="product">Jogo de Panelas 5P<span class="sku">SKU 51407</span></td><td class="category-tag table-category">Casa & decoração</td><td class="right">318</td><td class="right">R$ 41.340</td><td class="right growth">▲ 4,8%</td></tr>
+              <tr><td class="rank">09</td><td class="product">Relógio Smart Fit<span class="sku">SKU 88712</span></td><td class="category-tag table-category">Eletrônicos</td><td class="right">276</td><td class="right">R$ 38.640</td><td class="right growth">▲ 3,6%</td></tr>
+              <tr><td class="rank">10</td><td class="product">Luminária Mesa Halo<span class="sku">SKU 39004</span></td><td class="category-tag table-category">Casa & decoração</td><td class="right">295</td><td class="right">R$ 29.500</td><td class="right growth">▲ 2,9%</td></tr>
+            </tbody></table><div class="panel-foot">Ranking ordenado por unidades vendidas · dados demonstrativos</div>
+          </article>
+
+          <article class="panel channels"><div class="panel-head"><div class="panel-title">Desempenho por canal</div><span class="panel-menu">⋮</span></div>
+            <div class="channel-row"><div class="channel-icon">▣</div><div class="channel-name">E-commerce<small>7.842 pedidos</small></div><div class="channel-total">R$ 412,8 mil</div></div>
+            <div class="channel-row"><div class="channel-icon">⌂</div><div class="channel-name">Lojas físicas<small>5.119 pedidos</small></div><div class="channel-total">R$ 286,4 mil</div></div>
+            <div class="channel-row"><div class="channel-icon">◇</div><div class="channel-name">Marketplace<small>2.406 pedidos</small></div><div class="channel-total">R$ 143,4 mil</div></div>
+            <div class="pipeline"><span class="status-dot"></span>Pipeline atualizado · latência 2m 14s</div>
+            <div class="panel-foot">Última reconciliação: 25 set 2026, 14:32</div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const refreshButton = document.querySelector('#refreshButton');
+    const refreshState = document.querySelector('#refreshState');
+    const periodFilter = document.querySelector('#periodFilter');
+    const rangeButton = document.querySelector('#rangeButton');
+    const channelFilter = document.querySelector('#channelFilter');
+    const categoryFilter = document.querySelector('#categoryFilter');
+    const rows = [...document.querySelectorAll('#rankingBody tr')];
+
+    function refreshDashboard() {
+      refreshState.textContent = 'Atualizando dados...';
+      refreshButton.style.transform = 'rotate(180deg)';
+      window.setTimeout(() => {
+        refreshState.textContent = 'Atualizado agora · fonte: Kafka / OLAP';
+        refreshButton.style.transform = '';
+      }, 550);
+    }
+
+    function syncRange() {
+      rangeButton.innerHTML = '◷ &nbsp;' + periodFilter.value + ' <span>⌄</span>';
+    }
+
+    function filterRanking() {
+      const category = categoryFilter.value;
+      rows.forEach(row => {
+        const categoryCell = row.querySelector('.category-tag');
+        const rowCategory = categoryCell ? categoryCell.textContent : '';
+        row.hidden = category !== 'Todas as categorias' && rowCategory !== category;
+      });
+      refreshState.textContent = channelFilter.value === 'Todos os canais'
+        ? 'Atualizado há 2 min · fonte: Kafka / OLAP'
+        : `Filtro aplicado: ${channelFilter.value} · fonte: Kafka / OLAP`;
+    }
+
+    refreshButton.addEventListener('click', refreshDashboard);
+    periodFilter.addEventListener('change', syncRange);
+    channelFilter.addEventListener('change', filterRanking);
+    categoryFilter.addEventListener('change', filterRanking);
+  </script>
+</body>
+</html>
