@@ -215,6 +215,95 @@ Mesmo sendo um dashboard comercial, a solução deve ter monitoria operacional p
 - Percentual de registros inválidos
 - Latência de consulta do Grafana
 
+### Catálogo de métricas extraíveis
+
+#### Métricas executivas e financeiras
+- **Faturamento bruto:** soma do valor das vendas aprovadas no período.
+- **Faturamento líquido:** valor das vendas após descontos, cancelamentos, devoluções e ajustes.
+- **Quantidade de pedidos:** número de pedidos ou transações aprovadas.
+- **Unidades vendidas:** soma das quantidades dos itens vendidos.
+- **Ticket médio:** faturamento líquido dividido pela quantidade de pedidos.
+- **Preço médio por unidade:** faturamento líquido dividido pelas unidades vendidas.
+- **Margem bruta:** receita líquida menos o custo dos produtos vendidos.
+- **Margem percentual:** margem bruta dividida pela receita líquida.
+- **Crescimento de vendas:** variação percentual contra o período anterior, mesmo período do ano anterior ou meta.
+- **Atingimento da meta:** faturamento realizado dividido pela meta definida para o período.
+
+#### Métricas de produto e best sellers
+- **Ranking de produtos por unidades:** ordenação dos SKUs pela quantidade vendida.
+- **Ranking de produtos por receita:** ordenação dos SKUs pelo faturamento gerado.
+- **Participação do produto no faturamento:** receita do produto dividida pela receita total.
+- **Participação acumulada do ranking:** percentual da receita concentrada nos produtos do top N.
+- **Velocidade de venda:** unidades vendidas por hora ou por dia.
+- **Crescimento por produto:** variação das unidades ou da receita do SKU contra o período de comparação.
+- **Produtos sem venda:** SKUs ativos sem transações no período selecionado.
+- **Cobertura de produtos:** quantidade de SKUs vendidos dividida pela quantidade de SKUs ativos.
+- **Taxa de cancelamento por produto:** pedidos cancelados divididos pelo total de pedidos do SKU.
+- **Taxa de devolução por produto:** unidades devolvidas divididas pelas unidades vendidas.
+
+#### Métricas de categoria e mix
+- **Faturamento por categoria:** receita agrupada por categoria e subcategoria.
+- **Unidades por categoria:** quantidade de itens vendidos por categoria.
+- **Participação da categoria:** receita ou unidades da categoria em relação ao total.
+- **Top produto por categoria:** SKU líder em unidades ou receita dentro de cada categoria.
+- **Concentração de categoria:** participação dos produtos mais vendidos dentro da receita da categoria.
+- **Evolução do mix:** variação da participação das categorias ao longo do tempo.
+- **Categorias em crescimento ou queda:** categorias ordenadas pela variação percentual no período.
+- **Diversidade do mix:** quantidade de SKUs e subcategorias que contribuíram para as vendas.
+
+#### Métricas por canal, loja e região
+- **Faturamento por canal:** receita agrupada por e-commerce, loja física e marketplace.
+- **Pedidos por canal:** quantidade de pedidos originados em cada canal.
+- **Ticket médio por canal:** comparação do valor médio dos pedidos entre canais.
+- **Faturamento por loja:** receita agrupada por unidade física.
+- **Unidades por loja:** volume vendido por loja, região ou cluster.
+- **Participação regional:** contribuição de cada região para a receita total.
+- **Conversão por canal:** pedidos aprovados divididos pelas sessões, propostas ou pedidos iniciados, quando essa fonte estiver disponível.
+- **Diferença de mix entre canais:** comparação da participação de produtos e categorias em cada canal.
+
+#### Métricas temporais e promocionais
+- **Vendas por hora, dia, semana e mês:** série temporal de receita, pedidos e unidades.
+- **Pico de vendas:** maior volume ou faturamento observado em uma janela de tempo.
+- **Sazonalidade:** comportamento recorrente por dia da semana, mês ou período promocional.
+- **Variação intradiária:** comparação do desempenho ao longo das horas do dia.
+- **Impacto de campanha:** variação de vendas durante a campanha contra uma linha de base.
+- **Vendas promocionais:** receita e unidades associadas a descontos ou campanhas.
+- **Desconto médio:** valor médio concedido por pedido ou produto.
+- **Elasticidade promocional:** variação do volume vendido em relação à variação do preço ou desconto.
+
+#### Métricas de estoque e operação comercial
+- **Ruptura de estoque:** produtos sem disponibilidade quando há demanda ou tentativa de venda.
+- **Cobertura de estoque:** estoque disponível dividido pela média de vendas diárias.
+- **Giro de estoque:** unidades vendidas ou custo vendido dividido pelo estoque médio.
+- **Venda perdida estimada:** demanda identificada durante períodos de indisponibilidade.
+- **Acuracidade de disponibilidade:** diferença entre estoque informado e estoque efetivamente disponível para venda.
+- **Tempo de atendimento do pedido:** intervalo entre criação, aprovação, separação e expedição.
+- **Pedidos atrasados:** pedidos fora do prazo esperado de processamento ou entrega.
+
+#### Métricas de qualidade e confiabilidade dos dados
+- **Latência de ingestão:** tempo entre a ocorrência da venda e sua chegada ao pipeline.
+- **Atraso de atualização:** tempo entre a chegada do evento e sua disponibilidade no dashboard.
+- **Volume de eventos recebidos e processados:** quantidade por minuto ou por janela de tempo.
+- **Taxa de processamento:** percentual de eventos processados com sucesso.
+- **Taxa de registros inválidos:** eventos rejeitados por schema, campos obrigatórios ou regras de negócio.
+- **Taxa de duplicidade:** eventos repetidos identificados por chave de negócio.
+- **Taxa de reconciliação:** diferença entre os totais das fontes transacionais e da camada analítica.
+- **Completude dos dados:** percentual de registros com produto, categoria, canal, loja e valores preenchidos.
+- **Atualidade das dimensões:** idade da última atualização de produto, categoria, preço e loja.
+- **Backlog do Kafka:** quantidade e idade dos eventos aguardando processamento.
+
+#### Métricas de desempenho da plataforma
+- **Latência das consultas:** tempo de resposta das consultas executadas pelo Grafana.
+- **Percentual de consultas lentas:** consultas acima do limite definido para o dashboard.
+- **Taxa de erro das consultas:** falhas de conexão, timeout ou erro de execução.
+- **Tempo de atualização dos painéis:** duração para carregar todos os painéis do dashboard.
+- **Disponibilidade do Grafana e do banco analítico:** percentual de tempo operacional.
+- **Uso de CPU, memória e armazenamento:** consumo dos componentes do pipeline e do motor analítico.
+- **Tempo de execução dos jobs de agregação:** duração e tendência dos jobs de atualização das tabelas analíticas.
+- **Taxa de falha dos jobs:** quantidade de execuções com erro em relação ao total.
+
+As métricas devem ser sempre segmentáveis por período, produto, categoria, marca, loja, região, canal e campanha, respeitando a disponibilidade desses atributos nas fontes de origem. Para o MVP, recomenda-se priorizar faturamento, unidades vendidas, pedidos, ticket médio, ranking de produtos, participação por categoria, vendas por canal, latência de ingestão e taxa de reconciliação.
+
 ### Alertas sugeridos
 - Pipeline de dados parado por mais de X minutos
 - Aumento anômalo ou queda anormal de vendas
